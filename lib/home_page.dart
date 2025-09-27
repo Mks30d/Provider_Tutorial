@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_tutorial/provider/counter_provider.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _count = 0;
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // currently complete widget is being rebuilt on notifyListeners
+    debugPrint("widget build...");
+
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(_count.toString(), style: TextStyle(fontSize: 20)),
+            Text(
+              "${Provider.of<CounterProvider>(context, listen: true).getCount()}",
+              style: TextStyle(fontSize: 20),
+            ),
+
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  _count++;
-                });
+                Provider.of<CounterProvider>(context, listen: false,).incrementCount();
               },
               child: Text("Increment"),
+            ),
+
+            ElevatedButton(
+              onPressed: () {
+                Provider.of<CounterProvider>(context, listen: false,).decrementCount();
+              },
+              child: Text("Decrement"),
             ),
           ],
         ),
