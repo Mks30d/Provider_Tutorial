@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider_tutorial/home_page.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_tutorial/list_map_related/list_map_page.dart';
-import 'package:provider_tutorial/list_map_related/list_map_provider.dart';
+import 'list_map_provider/list_map_page.dart';
+import 'list_map_provider/list_map_provider.dart';
 import 'package:provider_tutorial/provider/counter_provider.dart';
 
 void main() {
