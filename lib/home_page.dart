@@ -18,7 +18,9 @@ class HomePage extends StatelessWidget {
               builder: (consumerContext, _, _) {
                 debugPrint("Consumer build...");
                 return Text(
-                  "${Provider.of<CounterProvider>(consumerContext, listen: true).getCount()}",
+                  // "${Provider.of<CounterProvider>(consumerContext, listen: true).getCount()}", // or
+                  // "${Provider.of<CounterProvider>(consumerContext).getCount()}", //or
+                  "${consumerContext.watch<CounterProvider>().getCount()}",
                   style: TextStyle(fontSize: 20),
                 );
               },
@@ -26,14 +28,16 @@ class HomePage extends StatelessWidget {
 
             ElevatedButton(
               onPressed: () {
-                Provider.of<CounterProvider>(context, listen: false,).incrementCount();
+                // Provider.of<CounterProvider>(context, listen: false,).incrementCount(); // or
+                context.read<CounterProvider>().incrementCount();
               },
               child: Text("Increment"),
             ),
 
             ElevatedButton(
               onPressed: () {
-                Provider.of<CounterProvider>(context, listen: false,).decrementCount();
+                // Provider.of<CounterProvider>(context, listen: false,).decrementCount(); // or
+                context.read<CounterProvider>().incrementCount();
               },
               child: Text("Decrement"),
             ),
