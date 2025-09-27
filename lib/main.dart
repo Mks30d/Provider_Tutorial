@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider_tutorial/home_page.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_tutorial/list_map_related/list_map_page.dart';
+import 'package:provider_tutorial/list_map_related/list_map_provider.dart';
 import 'package:provider_tutorial/provider/counter_provider.dart';
 
 void main() {
@@ -19,11 +21,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: ChangeNotifierProvider(
-        create: (context) {
-          return CounterProvider();
-        },
-        child: HomePage(),
+
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => CounterProvider()),
+          ChangeNotifierProvider(create: (context) => ListMapProvider()),
+        ],
+        child: ListMapPage(),
       ),
     );
   }
