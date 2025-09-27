@@ -14,9 +14,14 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "${Provider.of<CounterProvider>(context, listen: true).getCount()}",
-              style: TextStyle(fontSize: 20),
+            Consumer<CounterProvider>(
+              builder: (consumerContext, _, _) {
+                debugPrint("Consumer build...");
+                return Text(
+                  "${Provider.of<CounterProvider>(consumerContext, listen: true).getCount()}",
+                  style: TextStyle(fontSize: 20),
+                );
+              },
             ),
 
             ElevatedButton(
