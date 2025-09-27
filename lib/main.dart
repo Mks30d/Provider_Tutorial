@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider_tutorial/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_tutorial/provider/counter_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +19,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomePage(),
+      home: ChangeNotifierProvider(
+        create: (context) {
+          return CounterProvider();
+        },
+        child: HomePage(),
+      ),
     );
   }
 }
