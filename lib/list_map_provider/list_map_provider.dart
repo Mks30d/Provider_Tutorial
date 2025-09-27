@@ -13,4 +13,9 @@ class ListMapProvider extends ChangeNotifier {
     _listData.add(data);
     notifyListeners();
   }
+
+  void removeData(int index) {
+    _listData.removeAt(index);
+    notifyListeners();
+  }
 }

@@ -6,7 +6,15 @@ import 'list_map_provider/list_map_provider.dart';
 import 'package:provider_tutorial/provider/counter_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CounterProvider()),
+        ChangeNotifierProvider(create: (context) => ListMapProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,13 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
 
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => CounterProvider()),
-          ChangeNotifierProvider(create: (context) => ListMapProvider()),
-        ],
-        child: ListMapPage(),
-      ),
+      home: ListMapPage(),
     );
   }
 }

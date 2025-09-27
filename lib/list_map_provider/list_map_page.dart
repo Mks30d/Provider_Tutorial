@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_tutorial/list_map_provider/add_data_page.dart';
 import 'list_map_provider.dart';
 
 class ListMapPage extends StatelessWidget {
@@ -8,6 +9,8 @@ class ListMapPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("ListMapPage")),
+
       body: Consumer<ListMapProvider>(
         builder: (consumerContext, provider, _) {
           // var allData = Provider.of<ListMapProvider>(consumerContext).getListData(); // or
@@ -20,6 +23,12 @@ class ListMapPage extends StatelessWidget {
                     return ListTile(
                       title: Text("${allData[index]["id"]}"),
                       subtitle: Text("${allData[index]["name"]}"),
+                      trailing: IconButton(
+                        onPressed: () {
+                          context.read<ListMapProvider>().removeData(index);
+                        },
+                        icon: Icon(Icons.delete),
+                      ),
                     );
                   },
                 )
@@ -32,12 +41,19 @@ class ListMapPage extends StatelessWidget {
         children: [
           FloatingActionButton(
             onPressed: () {
-              context.read<ListMapProvider>().addData({
-                "id": DateTime.now().millisecond,
-                "name": "Name",
-              });
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddDataPage()),
+              );
             },
             child: Icon(Icons.add),
+          ),
+
+          FloatingActionButton(
+            onPressed: () {
+              context.read<ListMapProvider>().removeData(0);
+            },
+            child: Icon(Icons.delete),
           ),
         ],
       ),
